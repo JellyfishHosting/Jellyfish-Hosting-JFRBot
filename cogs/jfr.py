@@ -1,4 +1,5 @@
 import discord
+# Adds a new JFR server to the database
 from discord.ext import commands
 
 class JFR(commands.Cog):
@@ -14,7 +15,10 @@ class JFR(commands.Cog):
             guild_icon = "https://imgur.com/a/Uyo6hfv"
         else:
             guild_icon = guild.icon.url
-        await self.bot.jfrservers.insert({'guild_id': guild_id, 'guild_name': guild_name, 'avatar_url': guild_icon})
+        default_channel = guild.system_channel
+        invite = await default_channel.create_invite(max_age=0, max_uses=0)
+        link = str(invite)
+        await self.bot.jfrservers.insert({'guild_id': guild_id, 'guild_name': guild_name, 'avatar_url': guild_icon, 'invite_code': link})
         await ctx.followup.send("JFR Server has been added.")
 def setup(bot):
     bot.add_cog(JFR(bot))

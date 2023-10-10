@@ -1,4 +1,6 @@
 import discord
+# Main bot file that imports dependencies, initializes bot, connects to database, loads cogs, and runs bot.
+
 from discord.ext import commands
 import os
 import config
