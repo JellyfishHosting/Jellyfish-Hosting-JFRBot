@@ -18,6 +18,7 @@ if __name__ == "__main__":
     bot.mongo = motor.motor_asyncio.AsyncIOMotorClient(str(config.mongo_uri))
     bot.db = bot.mongo['jellyfishhost']
     bot.jfrservers = Document(bot.db, 'jfrservers')
+    bot.usersdb = Document(bot.db, 'users')
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             bot.load_extension(f'cogs.{filename[:-3]}')
