@@ -27,5 +27,16 @@ class JFR(commands.Cog):
         embed.add_field(name="Server Limit:", value="1", inline=False)
         await channel.send('<@&1161668411986804807>', embed=embed)
         await ctx.followup.send("JFR Server has been added.")
+
+    @commands.slash_command(name="removejfr", description="Removes a JFR server from the database. RUN THIS COMMAND THEN REMOVE THE BOT FROM THE GUILD.")
+    @commands.has_role(1160344631075160114)
+    async def removejfr(self, ctx : commands.Context, guild_id: discord.Option(str, description="The guild ID of the server.", required=True), guild_name: discord.Option(str, description="The name of the guild.", required=True)):
+        await ctx.defer()
+        await self.bot.jfrservers.delete_by_custom({'guild_id': guild_id})
+        channel = self.bot.get_channel(1147869001326792798)
+        embed = discord.Embed(title="JFR Server removed!", description="A JFR Server has just been removed!", color=discord.Color.blue())
+        embed.add_field(name="Guild Name:", value=f"{guild_name}", inline=False)
+        await channel.send('<@&1161668411986804807>', embed=embed)
+        await ctx.followup.send("JFR Server has been removed.")
 def setup(bot):
     bot.add_cog(JFR(bot))
