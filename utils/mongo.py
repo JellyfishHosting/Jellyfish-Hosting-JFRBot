@@ -78,15 +78,7 @@ class Document:
             return await self.insert({**filter_dict, **update_data})
         
         await self.db.update_one(filter_dict, {f"${option}": update_data}, *args, **kwargs)
-    
-    async def update_by_custom_push(self, filter_dict, update_data, option="push", *args, **kwargs):
-        self.__ensure_dict(filter_dict)
-        self.__ensure_dict(update_data)
 
-        if not bool(await self.find_by_custom(filter_dict)):
-            return await self.insert({**filter_dict, **update_data})
-        
-        await self.db.update_one(filter_dict, {f"${option}": update_data}, *args, **kwargs)
 
     async def unset(self, data):
         self.__ensure_dict(data)
