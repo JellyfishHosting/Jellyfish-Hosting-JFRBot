@@ -70,6 +70,7 @@ class Document:
     async def upsert_custom(self, filter_dict, update_data, option="set", *args, **kwargs):
         await self.update_by_custom(filter_dict, update_data, option, upsert=True, *args, **kwargs)
     
+    # use for all update, option can be changed
     async def update_by_custom(self, filter_dict, update_data, option="set", *args, **kwargs):
         self.__ensure_dict(filter_dict)
         self.__ensure_dict(update_data)
@@ -78,7 +79,6 @@ class Document:
             return await self.insert({**filter_dict, **update_data})
         
         await self.db.update_one(filter_dict, {f"${option}": update_data}, *args, **kwargs)
-
 
     async def unset(self, data):
         self.__ensure_dict(data)
