@@ -18,7 +18,7 @@ class JFR(commands.Cog):
         default_channel = guild.system_channel
         invite = await default_channel.create_invite(max_age=0, max_uses=0)
         link = str(invite)
-        await self.bot.jfrservers.insert({'guild_id': guild_id, 'guild_name': guild_name, 'avatar_url': guild_icon, 'invite_code': link})
+        await self.bot.jfrservers.insert({'guild_id': guild_id, 'guild_name': guild_name, 'avatar_url': guild_icon, 'invite_code': link, 'people_joined': [{"0": 0}]})
         channel = self.bot.get_channel(1147869001326792798)
         embed = discord.Embed(title="New JFR Server added!", description="Head to https://my.jellyfishhosting.xyz/joinforresources for more info.", color=discord.Color.blue())
         embed.add_field(name="Storage:", value="1000MB", inline=False)
